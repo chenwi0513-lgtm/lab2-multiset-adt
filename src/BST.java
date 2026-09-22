@@ -52,11 +52,44 @@ public class BST {
 
 
     public void delete(int item) {
+        if (this.isEmpty()){
+            return;
+        }
+        else if(this.root.equals(item)){
+          this.deleteRoot();
+        }
+        else if(item < this.root){
+            this.left.delete(item);
+        }
+        else{
+            this.right.delete(item);
+        }
 
     }
 
     private void deleteRoot() {
+        if (this.left.isEmpty() && this.right.isEmpty()) {
+            this.root = null;
+            this.left = null;
+            this.right = null;
+        } else if (this.left.isEmpty()) {
+            this.root = this.right.root;
+            BST temp1 = this.right.left;
+            BST temp2 = this.right.right;
+            this.left = temp1;
+            this.right = temp2;
 
+        } else if (this.right.isEmpty()) {
+            this.root = this.left.root;
+            BST temp1 = this.left.left;
+            BST temp2 = this.left.right;
+            this.left = temp1;
+            this.right = temp2;
+
+
+        } else {
+            this.root = this.left.extractMax()
+        }
     }
 
 
